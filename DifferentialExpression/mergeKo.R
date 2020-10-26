@@ -1,7 +1,14 @@
 #!/usr/bin/env Rscript 
 # mergeKo.R
+
+"""
+Script for merging the aligned transcripts to their genes
+"""
+
+
 # load the kable library to display formatted tables 
 library(knitr)
+
 # load the blast results as a table 
 blastFile <- "/scratch/SampleDataFiles/Annotation/transcriptBlast.txt"
 keggFile <- "/scratch/SampleDataFiles/Annotation/kegg.txt"

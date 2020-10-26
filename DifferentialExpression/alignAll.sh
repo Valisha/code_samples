@@ -1,6 +1,11 @@
 #!/usr/bin/env bash 
 # alignAll.sh 
-outDir="quant/"
+
+"""
+Script for aligining all the fastq file. bash scripting for looping over all the files and aligning each file. 
+"""
+
+outDir="quant/" # output directory
 fastqPath="/scratch/SampleDataFiles/Paired/"
 leftSuffix=".R1.paired.fastq"
 rightSuffix=".R2.paired.fastq"
