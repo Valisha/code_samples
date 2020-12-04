@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-#!/usr/bin/env python3
 """
 Script for analysing EEG data taken as a matlab file input. Output includes three excel files that would contain details about the most consistent features obtained from the pipeline
 """
