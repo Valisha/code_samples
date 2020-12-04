@@ -37,11 +37,9 @@ def loading_required_libraries():
 
 
 def get_input():
-    
     """
     Takes in the input from the python notebook, as 3 required matlab files, the group of interest and the accuracy threshold required for the workflow
     """
-
     path_mat = str(input("Path to the complete non-reshaped matlab file: "))
     path_binned = str(input("Path to binned matlab file: "))
     path_2hz = str(input("Path to 2Hz matlab file: "))
