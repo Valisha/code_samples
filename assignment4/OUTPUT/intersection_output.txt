@@ -1,0 +1,4 @@
+Number of unique gene names in hgnc_complete_set_reduced.txt: 43547
+Number of unique gene names in HUGO_genes.txt: 11815
+Number of common gene symbols found: 8664
+Output stored in OUTPUT/intersection_output.txt
