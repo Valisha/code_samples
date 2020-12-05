@@ -1,0 +1,12 @@
+/usr/local/programs/cufflinks-2.2.1.Linux_x86_64/cuffmerge assembly_list.txt -g /home/shah.val/BINF6308/assmt11/yeast/Saccharomyces_cerevisiae.R64-1-1.95.gtf -s /home/shah.val/BINF6308/assmt11/yeast/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa
+gtf_to_sam -F /scratch/BINF6308_2019S/gtf/exp1/transcripts.gtf ./merged_asm/tmp/gtf2sam_filetrSRN0
+gtf_to_sam -F /scratch/BINF6308_2019S/gtf/exp2/transcripts.gtf ./merged_asm/tmp/gtf2sam_fileWyNlQB
+gtf_to_sam -F /scratch/BINF6308_2019S/gtf/exp3/transcripts.gtf ./merged_asm/tmp/gtf2sam_fileiogxhd
+gtf_to_sam -F /scratch/BINF6308_2019S/gtf/salt1/transcripts.gtf ./merged_asm/tmp/gtf2sam_fileHA2j7O
+gtf_to_sam -F /scratch/BINF6308_2019S/gtf/salt2/transcripts.gtf ./merged_asm/tmp/gtf2sam_file8rpkmr
+gtf_to_sam -F /scratch/BINF6308_2019S/gtf/sorb1/transcripts.gtf ./merged_asm/tmp/gtf2sam_fileQiAt03
+gtf_to_sam -F /scratch/BINF6308_2019S/gtf/sorb2/transcripts.gtf ./merged_asm/tmp/gtf2sam_fileA9B82G
+sort -k 3,3 -k 4,4n --temporary-directory=./merged_asm//tmp/ ./merged_asm/tmp/gtf2sam_filetrSRN0 ./merged_asm/tmp/gtf2sam_fileWyNlQB ./merged_asm/tmp/gtf2sam_fileiogxhd ./merged_asm/tmp/gtf2sam_fileHA2j7O ./merged_asm/tmp/gtf2sam_file8rpkmr ./merged_asm/tmp/gtf2sam_fileQiAt03 ./merged_asm/tmp/gtf2sam_fileA9B82G > ./merged_asm/tmp/mergeSam_filesFujuk
+cufflinks -o ./merged_asm/ -F 0.05 -q --overhang-tolerance 200 --library-type=transfrags -A 0.0 --min-frags-per-transfrag 0 --no-5-extend -p 1 ./merged_asm/tmp/mergeSam_filesFujuk
+cuffcompare -o tmp_meta_asm -C -G  ./merged_asm//transcripts.gtf
+cuffcompare -o tmp_meta_asm -C -G  ./merged_asm//merged.gtf

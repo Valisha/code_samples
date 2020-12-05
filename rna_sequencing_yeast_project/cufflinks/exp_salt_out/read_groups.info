@@ -1,0 +1,6 @@
+file	condition	replicate_num	total_mass	norm_mass	internal_scale	external_scale
+../bam/exp1/exp1.bam	exp	0	2.34585e+06	2.29247e+06	0.949328	1
+../bam/exp2/exp2.bam	exp	1	2.35626e+06	2.29247e+06	0.948007	1
+../bam/exp3/exp3.bam	exp	2	2.28717e+06	2.29247e+06	0.959426	1
+../bam/salt1/salt1.bam	salt	0	2.22972e+06	2.29247e+06	1.08625	1
+../bam/salt2/salt2.bam	salt	1	2.25252e+06	2.29247e+06	1.08822	1

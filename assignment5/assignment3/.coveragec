@@ -1,0 +1,5 @@
+[run]
+omit =
+     test_*
+     /usr/local/lib/python3.7/*
+     /usr/local/lib/python3.6/*

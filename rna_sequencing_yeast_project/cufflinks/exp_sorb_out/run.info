@@ -1,0 +1,5 @@
+param	value
+cmd_line	cuffdiff output_cuffcomp.combined.gtf ../bam/exp1/exp1.bam,../bam/exp2/exp2.bam,../bam/exp3/exp3.bam ../bam/sorb1/sorb1.bam,../bam/sorb2/sorb2.bam -b ../yeast/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa -L exp,sorb -o exp_sorb_out -M ../yeast/mask.gtf 
+version	2.2.1
+SVN_revision	4237
+boost_version	104700

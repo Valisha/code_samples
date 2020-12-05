@@ -1,0 +1,9 @@
+exp1/transcripts.gtf
+exp2/transcripts.gtf
+exp3/transcripts.gtf
+salt1/transcripts.gtf
+salt2/transcripts.gtf
+sorb1/transcripts.gtf
+sorb2/transcripts.gtf
+
+
