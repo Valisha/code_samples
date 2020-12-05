@@ -1,0 +1,61 @@
+## needman.py  
+# Overview 
+To align two sequence, globally with the help  of needleman Wunsch algorithm. This program has the functions for creating the score matrix, asigning the scores, printing the matrix, recovering the alignment with the help of the scoring matrix and lastly printing the two aligned sequences 
+# Date Created 
+03/02/2019
+# Author 
+Valisha. Shah 
+# Running file.py 
+./needman.py 
+
+## smithWaterman.py  
+# Overview 
+This program gives out the local alignment of two sequences with the help of smithwaterman algorith, and the basic functions for scoring have been imported from the needman.py program as nm
+# Date Created 
+03/02/2019
+# Author 
+Valisha. Shah 
+# Running file.py 
+./smithWaterman.py
+
+## fitting.py 
+# Overview 
+This program is to give out the fitting alignment of two sequences. With the help of functions imported from the needman.py program
+# Date Created 
+03/02/2019
+# Author 
+Valisha. Shah 
+# Running file.py 
+./fitting.py
+
+
+## prog1.py 
+# Overview 
+This program is to filter out the blast report on the basis of evalue and also remove the self hits (the blast filtered blast report with e value lesser than 1e-4 has been stored into the file-file1x.txt) and file1.txt is the file which has self hits removed from file1x.txt
+# Date Created 
+03/02/2019
+# Author 
+Valisha. Shah 
+# Running file.py 
+./prog1.py
+
+
+## prog2.py 
+# Overview 
+This program is to find out ORFs that occur side by side on a gene along with that there homologs also occur in the similar order and store that in a file names file2.txt along with that create another file-file3.txt which has a more organised result of file2.txt which gives us the number of ORFs that occur side by side at  once and also from which point to which point they occur
+# Date Created 
+03/02/2019
+# Author 
+Valisha. Shah 
+# Running file.py 
+./prog2.py
+
+## prog3.py 
+# Overview 
+This program is to find out the probability of the occurence of these ORFs together and give out a hypothesis from the conclusio found, storing the resuls in another file named file4.txt
+# Date Created 
+03/02/2019
+# Author 
+Valisha. Shah 
+# Running file.py 
+./prog3.py
