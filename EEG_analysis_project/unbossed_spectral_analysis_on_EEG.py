@@ -39,9 +39,11 @@ def get_input():
     path_2hz = str(input("Path to 2Hz matlab file: "))
     grouping = str(input("Grouping (WT/HET): "))
     acc_thresh = float(str(input("Accuracy threshold: ")))
-    return(path_mat, path_binned, path_2hz, grouping, acc_thresh)
+    return path_mat, path_binned, path_2hz, grouping, acc_thresh
+
 def to_str(var):
-    return(str(list(np.reshape(np.asarray(var), (1, np.size(var)))[0]))[2:-2])
+    return str(list(np.reshape(np.asarray(var), (1, np.size(var)))[0]))[2:-2]
+
 def load_data(scipy_file_2hz, results_reshaped_pxx_2hz, results_reshaped_pxx_binned, scipy_file_binned, grouping, excluded_mice):
     """ To load the 2Hz bins data from reshaped matlab dataset"""
     labels_2hz = ['0.5-2', '2-4', '4-6', '6-8', '8-10', '10-12', '12-14', '14-16', '16-18', '18-20', '20-22', '22-24', '24-26', '26-28', '28-30', '30-32', '32-34', '34-36', '36-38', '38-40', '40-42', '42-44', '44-46', '46-48', '48-50', '50-52', '52-54', '54-56', '56-58', '58-60', '60-62', '62-64', '64-66', '66-68', '68-70', '70-72', '72-74', '74-76', '76-78', '78-80', '80-82', '82-84', '84-86', '86-88', '88-90', 'Broadband (0.5-90)']
@@ -75,7 +77,6 @@ def load_data(scipy_file_2hz, results_reshaped_pxx_2hz, results_reshaped_pxx_bin
             print("Please check your grouping, no group of this name found")
             sys.exit()
         d_new_2hz = pd.concat(new_dict_2hz, keys = new_dict_2hz.keys())
-
         for j in range(len(results_reshaped_pxx_binned)):
             group_binned = str(scipy_file_binned['results_reshaped']['group'][j][0][0])
             mouse_id_binned = str(scipy_file_binned['results_reshaped']['mouse'][j][0][0])
@@ -93,7 +94,7 @@ def load_data(scipy_file_2hz, results_reshaped_pxx_2hz, results_reshaped_pxx_bin
         d_new['target'] = d
         final_dict = final_dict.append(d_new)
         print(final_dict.columns)
-    return(final_dict, unique_doses)
+    return final_dict, unique_doses
 
 def bootstrap_data(dataset, iterations):
     """saving the bootstraped data in a dictionary"""
@@ -107,7 +108,8 @@ def bootstrap_data(dataset, iterations):
         new_dict_X_test.append(data.iloc[test_idx, :])
         new_dict_y_train.append(y[train_idx])
         new_dict_y_test.append(y[test_idx])
-    return(new_dict_X_train, new_dict_X_test, new_dict_y_train, new_dict_y_test)
+    return new_dict_X_train, new_dict_X_test, new_dict_y_train, new_dict_y_test
+
 def rfe_modelling(iterations):
     """modelling and feature selection with training and testing dataset just for LR, SVM and LDA"""
     X_train = new_dict_X_train[iterations]
@@ -127,7 +129,7 @@ def rfe_modelling(iterations):
     fl.append(d) ## getting teh features and their feature importances as a dictionary and then appending that dictionary to a list
     acc.append(metrics.accuracy_score(y_pred, y_test))
     f1.append(metrics.f1_score(y_pred, y_test))
-    return(features, fl, acc, f1)
+    return features, fl, acc, f1
 
 def rfe_modelling_rf(iterations):
     """modelling and feature selection with training and testing dataset just for Random Forest"""
@@ -148,8 +150,7 @@ def rfe_modelling_rf(iterations):
     fl.append(d) ## getting teh features and their feature importances as a dictionary and then appending that dictionary to a list
     acc.append(metrics.accuracy_score(y_pred, y_test))
     f1.append(metrics.f1_score(y_pred, y_test))
-    return(features, fl, acc, f1)
-
+    return features, fl, acc, f1
 
 def unzipping_multiprocessing_data(l1):
     """unzips the multiprocessing output"""
@@ -164,7 +165,8 @@ def unzipping_multiprocessing_data(l1):
         f1_new.append(l1[i][3][0])
     a_new1 = np.mean(acc_new)
     f1_new1 = np.mean(f1_new)
-    return(features_new, fl_new, a_new1, f1_new1)
+    return features_new, fl_new, a_new1, f1_new1
+
 def results(features_new, fl_new,iterations, a_new1, f1_new1, model_name):
     """takes the data from the modelling, calculates stability score, average accuracy, f1-score so that it can be shown in a dataframe format"""
     features_flat_list = [item for sublist in features_new for item in sublist] ## creating a flat list for counter function
@@ -184,7 +186,7 @@ def results(features_new, fl_new,iterations, a_new1, f1_new1, model_name):
                              'stability scores':[np.round(vals,2)], 'cummulative_stability_score':cum_ss,
                              'features':[final_feats], 'ss_for_the_whole_list':max_key, 
                              'most_frequent_list':[max_val],'model':model_name[m], 'timebin':t})
-    return(megalist)
+    return megalist
 
 def calling_func_acc_threshold(pnb_df1, models, iterations, num_features_to_choose, model_name, acc_thresh, unique_doses):
     global acc, f1, fl, features,new_dict_X_train, new_dict_X_test, new_dict_y_train, new_dict_y_test, dataset,m,t, model
@@ -218,7 +220,7 @@ def calling_func_acc_threshold(pnb_df1, models, iterations, num_features_to_choo
                 df_wo_thresh = df_wo_thresh.append(df_new2)
                 d_new2 = df_new2[df_new2['accuracy'] >acc_thresh]
                 d = d.append(d_new2)
-    return(d, df_wo_thresh)
+    return d, df_wo_thresh
 
 def most_consistent_features(data):
     ss = list(data['stability scores'])
@@ -240,7 +242,7 @@ def most_consistent_features(data):
     avg_ss10 = np.round(list(dict(itertools.islice(sorted_result.items(), 10)).values()),0)
     avg_ss5 =  np.round(list(dict(itertools.islice(sorted_result.items(), 5)).values()),0)
     d_new = pd.DataFrame({'avg_accuracy_all_models_timebins_doses': np.round(avg_accuracy,2), 'avg_f1score_all_models_timebins_doses': np.round(avg_f1, 2), 'top-10': [sorted_list_feats10], 'top-5':[sorted_list_feats5]})
-    return(d_new, sorted_list_feats10, sorted_list_feats5)
+    return d_new, sorted_list_feats10, sorted_list_feats5
 
 def run_analysis(path_mat, path_binned, path_2hz, grouping, acc_thresh):
     global unique_doses, best_random, models, model_name, iterations, num_features_to_choose, pnb_df1, data_finall, sorted_list_5_thresh, sorted_list_10_thresh, binned_2hz_thresh_most_consistent_features, timepoint, exclude_animals
@@ -267,7 +269,6 @@ def run_analysis(path_mat, path_binned, path_2hz, grouping, acc_thresh):
     timepoint = time[0][0][0][:-1]
     data_finall, data_finall_wo_thresh = calling_func_acc_threshold(pnb_df1, models, iterations, num_features_to_choose, model_name, acc_thresh, unique_doses)
     binned_2hz_thresh_most_consistent_features, sorted_list_10_thresh, sorted_list_5_thresh = most_consistent_features(data_finall)
-    
     print('top-5-features: ', sorted_list_5_thresh)
     for t in range(len(timepoint)):
         pnb_df1.loc[idx[:,t], 'timepoint']  = t
@@ -276,7 +277,7 @@ def run_analysis(path_mat, path_binned, path_2hz, grouping, acc_thresh):
         strr = ('Line plot for frequency ' + d1 + 'Hz' + 'dose - ' + unique_doses[1][0:6] + 'group ' + grouping)
         plt.title(strr)
         plt.show()
-    return(binned_2hz_thresh_most_consistent_features, data_finall, data_finall_wo_thresh)
+    return binned_2hz_thresh_most_consistent_features, data_finall, data_finall_wo_thresh
 
 
 if __name__ == "__main__":
