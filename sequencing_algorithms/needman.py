@@ -1,6 +1,13 @@
 #!/usr/bin/env python3 
 # creating the substution matrix 
+## scoring matrix
+## the axes has the two sequences 
+## we start with bottom up appraoch, where the first value is 0. and every time we go diagonal. there can three possible values. 
+## value from the side bix is always 0, and value from bottom/top box is 1 and then match = +2, mismatch = -1 and gap = 0. then we compare all the three values and keep the largest value
+## initiation point has the 1st column and 1st row is -2, -4, -6 and -8.. 
 def create_submat (match, mismatch, alphabet):
+    """Function to assign score for match and mismatch""" 
+    
     sm = {}
     for c1 in alphabet:
         for c2 in alphabet:
@@ -12,6 +19,7 @@ def create_submat (match, mismatch, alphabet):
 
 # function to calculate the score for each position 
 def score_pos (c1, c2, sm, g):
+    """This function generates the scoring matrix"""
     if c1 == "-" or c2 == "-":
         return g
     else:
@@ -27,6 +35,8 @@ def print_mat (mat):
 
 #printing the s and t matrix 
 def needleman_Wunsch (seq1, seq2, sm, g):
+    ### Start with list of lists of S and T
+    ### 
     S = [[0]]
     T = [[0]]
     for j in range(1, len(seq2)+1):
